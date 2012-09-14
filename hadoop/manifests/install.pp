@@ -6,18 +6,14 @@
 #
 # Actions: None
 #
-# Requires: apt::repo::cloudera
+# Requires: <your repository>
 #
 # Sample Usage: include hadoop::install
 #
 class hadoop::install {
   include hadoop::params
-  include apt::repo::cloudera
-  include sun-jdk6
-  Class['apt::repo::cloudera'] -> Class['hadoop::install']
-  Class['sun-jdk6'] -> Class['hadoop::install']
 
-  package { [ 'hadoop-0.20', 'hadoop-0.20-native', 'hadoop-0.20-metrics', 'liblzo2-dev', 'liblzo2-2', 'hadoop-lzo', 'hue-plugins' ]:
+  package { [ 'hadoop-0.20', 'hadoop-0.20-native', 'liblzo2-dev', 'liblzo2-2', 'hadoop-lzo', 'hue-plugins' ]:
     ensure => 'installed'
   }
 
