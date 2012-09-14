@@ -1,0 +1,54 @@
+---
+fs_default_name:                         'hdfs://my-namenode:8020'
+mapred_job_tracker:                      'my-jobtracker:8021'
+mapred_tasktracker_map_tasks_maximum:    '5'
+mapred_tasktracker_reduce_tasks_maximum: '5'
+
+#_ CLUSTER SERVERS _#
+cluster_dfs_hosts:
+  - 'SERVER1'
+  - 'SERVER2'
+  - 'SERVER3'
+  - 'SERVER4'
+
+#_ MAPRED SERVERS _#
+cluster_mapred_hosts:
+  - 'SERVER1'
+  - 'SERVER2'
+  - 'SERVER3'
+  - 'SERVER4'
+
+#_ MAPRED EXCLUDE SERVERS _#
+cluster_mapred_hosts_exclude:
+  - 'BADSERVER1'
+
+# FAIR SCHEDULER #
+poolmaxjobsdefault: '146'
+usermaxjobsdefault: '146'
+ 
+#_ FAIR QUEUES _#
+fair_pool_queues:
+  pool1:
+    - 'minMaps'
+    - '0'
+    - 'maxMaps'
+    - '50'
+    - 'minReduces' 
+    - '0'
+    - 'maxReduces'
+    - '50'
+    - 'maxRunningJobs'
+    - '100'
+    - 'minSharePreemptionTimeout'
+    - '300'
+    - 'weight'
+    - '1.0'
+  pool2:
+    - 'minMaps'
+    - '600'
+    - 'minReduces' 
+    - '600'
+    - 'maxRunningJobs'
+    - '100'
+    - 'weight'
+    - '1.5'
