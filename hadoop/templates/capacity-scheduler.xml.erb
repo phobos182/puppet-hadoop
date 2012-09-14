@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+
+<!-- This is the configuration file for the resource manager in Hadoop. -->
+<!-- You can configure various scheduling parameters related to queues. -->
+<!-- The properties for a queue follow a naming convention,such as, -->
+<!-- mapred.capacity-scheduler.queue.<queue-name>.property-name. -->
+
+<configuration>
+
+  <!-- The default configuration settings for the capacity task scheduler -->
+  <!-- The default values would be applied to all the queues which don't have -->
+  <!-- the appropriate property for the particular queue -->
+  <property>
+    <name>mapred.capacity-scheduler.default-supports-priority</name>
+    <value><%= scope.lookupvar('hadoop::params::mapred_capacity_scheduler_default_supports_priority') %></value>
+    <description>If true, priorities of jobs will be taken into 
+      account in scheduling decisions by default in a job queue.
+    </description>
+  </property>
+  
+  <property>
+    <name>mapred.capacity-scheduler.default-minimum-user-limit-percent</name>
+    <value><%= scope.lookupvar('hadoop::params::mapred_capacity_scheduler_default_minimum_user_limit_percent') %></value>
+    <description>The percentage of the resources limited to a particular user
+      for the job queue at any given point of time by default.
+    </description>
+  </property>
+
+  <property>
+    <name>mapred.capacity-scheduler.default-maximum-initialized-jobs-per-user</name>
+    <value><%= scope.lookupvar('hadoop::params::mapred_capacity_scheduler_default_maximum_initialized_jobs_per_user') %></value>
+    <description>The maximum number of jobs to be pre-initialized for a user
+    of the job queue.
+    </description>
+  </property>
+
+
+  <!-- Capacity scheduler Job Initialization configuration parameters -->
+  <property>
+    <name>mapred.capacity-scheduler.init-poll-interval</name>
+    <value><%= scope.lookupvar('hadoop::params::mapred_capacity_scheduler_init_poll_interval') %></value>
+    <description>The amount of time in miliseconds which is used to poll 
+    the job queues for jobs to initialize.
+    </description>
+  </property>
+  <property>
+    <name>mapred.capacity-scheduler.init-worker-threads</name>
+    <value><%= scope.lookupvar('hadoop::params::mapred_capacity_scheduler_init_worker_threads') %></value>
+    <description>Number of worker threads which would be used by
+    Initialization poller to initialize jobs in a set of queue.
+    If number mentioned in property is equal to number of job queues
+    then a single thread would initialize jobs in a queue. If lesser
+    then a thread would get a set of queues assigned. If the number
+    is greater then number of threads would be equal to number of 
+    job queues.
+    </description>
+  </property>
+
+  <!-- Queues -->
+<% scope.lookupvar('hadoop::params::cap_queues').each do |q| -%><% scope.lookupvar('hadoop::params::capacity_queues')[q].each_slice(2) do |key,value| -%>
+  <property>
+    <name>mapred.capacity-scheduler.queue.<%= q %>.<%= key %></name>
+    <value><%= value %></value>
+  </property>
+<% end -%><% end -%>
+
+</configuration>

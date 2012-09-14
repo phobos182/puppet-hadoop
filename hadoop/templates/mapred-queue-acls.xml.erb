@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- This is a template file for queue acls configuration properties -->
+
+<configuration>
+
+  <!-- Queues -->
+<% scope.lookupvar('hadoop::params::hadoop_queues_acl').each do |q,item| -%><% item.each_slice(2) do |key,value| -%>
+  <property>
+    <name>mapred.queue.<%= q %>.<%= key %></name>
+    <value><%= value %></value>
+  </property>
+<% end -%><% end -%>
+
+</configuration>

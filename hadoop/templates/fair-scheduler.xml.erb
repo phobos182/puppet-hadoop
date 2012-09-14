@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<allocations>
+
+  <!-- Pool Queues -->
+<% scope.lookupvar('hadoop::params::fair_pool').each do |q| -%>  <pool name="<%= q %>">
+<% scope.lookupvar('hadoop::params::fair_pool_queues')[q].each_slice(2) do |key,value| -%>
+    <<%= key %>><%= value %></<%= key %>>
+<% end -%>  </pool>
+<% end -%>
+
+  <!-- User Queues -->
+<% scope.lookupvar('hadoop::params::fair_user').each do |q| -%>  <user name="<%= q %>">
+<% scope.lookupvar('hadoop::params::fair_user_queues')[q].each_slice(2) do |key,value| -%>
+    <<%= key %>><%= value %></<%= key %>>
+<% end -%>  </user>
+<% end -%>
+
+  <!-- Defaults -->
+  <poolMaxJobsDefault><%= scope.lookupvar('hadoop::params::poolmaxjobsdefault') %></poolMaxJobsDefault>
+  <userMaxJobsDefault><%= scope.lookupvar('hadoop::params::usermaxjobsdefault') %></userMaxJobsDefault>
+  <defaultMinSharePreemptionTimeout><%= scope.lookupvar('hadoop::params::defaultminsharepreemptiontimeout') %></defaultMinSharePreemptionTimeout>
+  <fairSharePreemptionTimeout><%= scope.lookupvar('hadoop::params::fairsharepreemptiontimeout') %></fairSharePreemptionTimeout>
+
+</allocations>

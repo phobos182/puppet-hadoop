@@ -1,0 +1,27 @@
+# Configuration of the "dfs" context
+dfs.class=<%= scope.lookupvar('hadoop::params::dfs_class') %>
+dfs.period=<%= scope.lookupvar('hadoop::params::dfs_period') %>
+<% scope.lookupvar('hadoop::params::dfs_opts').each do |k,v| -%>
+<%= k %>=<%= v %>
+<% end -%>
+
+# Configuration of the "mapred" context
+mapred.class=<%= scope.lookupvar('hadoop::params::mapred_class') %>
+mapred.period=<%= scope.lookupvar('hadoop::params::mapred_period') %>
+<% scope.lookupvar('hadoop::params::mapred_opts').each do |k,v| -%>
+<%= k %>=<%= v %>
+<% end -%>
+
+# Configuration of the "jvm" context
+jvm.class=<%= scope.lookupvar('hadoop::params::jvm_class') %>
+jvm.period=<%= scope.lookupvar('hadoop::params::jvm_period') %>
+<% scope.lookupvar('hadoop::params::jvm_opts').each do |k,v| -%>
+<%= k %>=<%= v %>
+<% end -%>
+
+# Configuration of the "rpc" context for ganglia
+rpc.class=<%= scope.lookupvar('hadoop::params::rpc_class') %>
+rpc.period=<%= scope.lookupvar('hadoop::params::rpc_period') %>
+<% scope.lookupvar('hadoop::params::rpc_opts').each do |k,v| -%>
+<%= k %>=<%= v %>
+<% end -%>

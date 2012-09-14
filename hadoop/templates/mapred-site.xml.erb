@@ -1,0 +1,162 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+  <property>
+    <name>mapred.job.tracker</name>
+    <value><%= scope.lookupvar('hadoop::params::mapred_job_tracker') %></value>
+    <final>true</final>
+  </property>
+  <property>
+    <name>mapred.hosts</name>
+    <value><%= scope.lookupvar('hadoop::params::mapred_hosts') %></value>
+    <final>true</final>
+  </property>
+  <property>
+    <name>mapred.hosts.exclude</name>
+    <value><%= scope.lookupvar('hadoop::params::mapred_hosts_exclude') %></value>
+    <final>true</final>
+  </property>
+  <property>
+    <name>mapred.local.dir</name>
+    <value><%= has_variable?('data_volumes') ? data_volumes.split(',').join('/hadoop/mapred/local,') + '/hadoop/mapred/local' : '/tmp/hadoop/mapred/local' %></value>
+    <final>true</final>
+  </property>
+  <property>
+    <name>mapred.output.compression.codec</name>
+    <value><%= scope.lookupvar('hadoop::params::mapred_output_compression_codec') %></value>
+  </property>
+  <property>
+    <name>mapred.output.compression.type</name>
+    <value><%= scope.lookupvar('hadoop::params::mapred_output_compression_type') %></value>
+    <final>true</final>
+  </property>
+  <property>
+    <name>mapred.output.compress</name> 
+    <value><%= scope.lookupvar('hadoop::params::mapred_output_compress') %></value>
+  </property>
+  <property>
+    <name>mapred.map.output.compression.codec</name>
+    <value><%= scope.lookupvar('hadoop::params::mapred_map_output_compression_codec') %></value>
+    <final>true</final>
+  </property>
+  <property>
+    <name>mapred.compress.map.output</name> 
+    <value><%= scope.lookupvar('hadoop::params::mapred_compress_map_output') %></value>
+    <final>true</final>
+  </property>
+  <property>
+    <name>mapred.child.java.opts</name>
+    <value><%= scope.lookupvar('hadoop::params::mapred_child_java_opts') %></value>
+  </property>
+  <property>
+    <name>mapreduce.jobtracker.tasktracker.maxblacklists</name>
+    <value><%= scope.lookupvar('hadoop::params::mapreduce_jobtracker_tasktracker_maxblacklists') %></value>
+    <final>true</final>
+  </property>
+  <property>
+    <name>mapreduce.job.maxtaskfailures.per.tracker</name>
+    <value><%= scope.lookupvar('hadoop::params::mapreduce_job_maxtaskfailures_per_tracker') %></value>
+    <final>true</final>
+  </property>
+  <property>
+    <name>mapred.child.ulimit</name>
+    <value><%= scope.lookupvar('hadoop::params::mapred_child_ulimit') %></value>
+    <final>true</final>
+  </property>
+  <property>
+    <name>mapred.job.reuse.jvm.num.tasks</name>
+    <value><%= scope.lookupvar('hadoop::params::mapred_job_reuse_jvm_num_tasks') %></value>
+    <description>How many tasks to run per jvm. If set to -1, there is no limit. </description>
+  </property>
+  <property>
+    <name>hadoop.job.history.user.location</name>
+    <value><%= scope.lookupvar('hadoop::params::hadoop_job_history_user_location') %></value>
+  </property>
+  <property>
+    <name>mapred.jobtracker.completeuserjobs.maximum</name>
+    <value><%= scope.lookupvar('hadoop::params::mapred_jobtracker_completeuserjobs_maximum') %></value>
+  </property>
+  <property>
+    <name>mapred.job.tracker.handler.count</name>
+    <value><%= scope.lookupvar('hadoop::params::mapred_job_tracker_handler_count') %></value>
+  </property>
+  <property>
+    <name>mapred.tasktracker.map.tasks.maximum</name>
+    <value><%= scope.lookupvar('hadoop::params::mapred_tasktracker_map_tasks_maximum') %></value>
+  </property>
+  <property>
+    <name>mapred.tasktracker.reduce.tasks.maximum</name>
+    <value><%= scope.lookupvar('hadoop::params::mapred_tasktracker_reduce_tasks_maximum') %></value>
+  </property>
+  <property>
+    <name>tasktracker.http.threads</name>
+    <value><%= scope.lookupvar('hadoop::params::tasktracker_http_threads') %></value>
+  </property>
+  <property>
+    <name>mapred.userlog.retain.hours</name>
+    <value><%= scope.lookupvar('hadoop::params::mapred_userlog_retain_hours') %></value>
+  </property>
+  <property>
+    <name>mapred.reduce.parallel.copies</name>
+    <value><%= scope.lookupvar('hadoop::params::mapred_reduce_parallel_copies') %></value>
+  </property>
+  <property>
+    <name>mapred.map.tasks.speculative.execution</name>
+    <value><%= scope.lookupvar('hadoop::params::mapred_map_tasks_speculative_execution') %></value>
+    <final>true</final>
+  </property>
+  <property>
+    <name>mapred.reduce.tasks.speculative.execution</name>
+    <value><%= scope.lookupvar('hadoop::params::mapred_reduce_tasks_speculative_execution') %></value>
+    <final>true</final>
+  </property>
+  <property>
+    <name>mapreduce.tasktracker.cache.local.numberdirectories</name>
+    <value><%= scope.lookupvar('hadoop::params::mapreduce_tasktracker_cache_local_numberdirectories') %></value>
+    <final>true</final>
+  </property>
+  <property>
+    <name>jobtracker.thrift.address</name>
+    <value><%= scope.lookupvar('hadoop::params::jobtracker_thrift_address') %></value>
+  </property>
+  <property>
+    <name>mapred.jobtracker.plugins</name>
+    <value><%= scope.lookupvar('hadoop::params::mapred_jobtracker_plugins') %></value>
+    <description>Comma-separated list of jobtracker plug-ins to be activated.</description>
+  </property>
+  <property>
+    <name>mapred.jobtracker.taskScheduler</name>
+    <value><%= scope.lookupvar('hadoop::params::mapred_jobtracker_taskscheduler') %></value>
+  </property>
+  <property>
+    <name>mapred.fairscheduler.allocation.file</name>
+    <value><%= scope.lookupvar('hadoop::params::mapred_fairscheduler_allocation_file') %></value>
+  </property>
+  <property>
+    <name>mapred.fairscheduler.preemption</name>
+    <value><%= scope.lookupvar('hadoop::params::mapred_fairscheduler_preemption') %></value>
+  </property>
+  <property>
+    <name>mapred.fairscheduler.poolnameproperty</name>
+    <value><%= scope.lookupvar('hadoop::params::mapred_fairscheduler_poolnameproperty') %></value>
+  </property>
+  <property>
+    <name>mapred.fairscheduler.sizebasedweight</name>
+    <value><%= scope.lookupvar('hadoop::params::mapred_fairscheduler_sizebasedweight') %></value>
+  </property>
+  <property>
+    <name>mapred.fairscheduler.weightadjuster</name>
+    <value><%= scope.lookupvar('hadoop::params::mapred_fairscheduler_weightadjuster') %></value>
+  </property>
+  <property>
+    <name>mapred.newjobweightbooster.factor</name>
+    <value><%= scope.lookupvar('hadoop::params::mapred_newjobweightbooster_factor') %></value>
+  </property>
+  <property>
+    <name>mapred.newjobweightbooster.duration</name>
+    <value><%= scope.lookupvar('hadoop::params::mapred_newjobweightbooster_duration') %></value>
+  </property>
+</configuration>

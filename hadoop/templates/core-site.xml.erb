@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+  <property>
+    <name>fs.default.name</name>
+    <value><%= scope.lookupvar('hadoop::params::fs_default_name') %></value>
+    <final>true</final>
+  </property>
+  <property>
+    <name>hadoop.tmp.dir</name>
+    <value><%= scope.lookupvar('hadoop::params::hadoop_tmp_dir') %></value>
+    <final>true</final>
+  </property>
+  <property>
+    <name>fs.trash.interval</name>
+    <value><%= scope.lookupvar('hadoop::params::fs_trash_interval') %></value>
+    <final>true</final>
+  </property>
+  <property>
+    <name>topology.script.file.name</name>
+    <value><%= scope.lookupvar('hadoop::params::topology_script_file_name') %></value>
+    <final>true</final>
+  </property>
+  <property>
+    <name>local.cache.size</name>
+    <value><%= scope.lookupvar('hadoop::params::local_cache_size') %></value>
+    <final>true</final>
+  </property>
+  <property>
+    <name>io.compression.codecs</name>
+    <value><%= scope.lookupvar('hadoop::params::io_compression_codecs') %></value>
+    <final>true</final>
+  </property>
+  <property>
+    <name>io.compression.codec.lzo.class</name>
+    <value><%= scope.lookupvar('hadoop::params::io_compression_codec_lzo_class') %></value>
+    <final>true</final>
+  </property>
+  <property>
+   <name>io.file.buffer.size</name>
+   <value><%= scope.lookupvar('hadoop::params::io_file_buffer_size') %></value>
+  </property>
+  <property>
+    <name>io.sort.factor</name>
+    <value><%= scope.lookupvar('hadoop::params::io_sort_factor') %></value>
+  </property>
+  <property>
+    <name>io.sort.mb</name>
+    <value><%= scope.lookupvar('hadoop::params::io_sort_mb') %></value>
+  </property>
+<% scope.lookupvar('hadoop::params::proxyuser').each do |user| -%><% scope.lookupvar('hadoop::params::hadoop_proxyuser')[user].each_slice(2) do |key,value| -%>  <property>
+    <name>hadoop.proxyuser.<%= user %>.<%= key %></name>
+    <value><%= value %></value>
+  </property>
+<% end -%><% end -%>
+  <property>
+    <name>webinterface.private.actions</name>
+    <value><%= scope.lookupvar('hadoop::params::webinterface_private_actions') %></value>
+  </property>
+</configuration>

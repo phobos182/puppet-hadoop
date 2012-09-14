@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+  <property>
+     <name>dfs.replication</name>
+     <value><%= scope.lookupvar('hadoop::params::dfs_replication') %></value>
+     <final>true</final>
+  </property>
+  <property>
+     <name>dfs.permissions</name>
+     <value><%= scope.lookupvar('hadoop::params::dfs_permissions') %></value>
+     <final>true</final>
+  </property>
+  <property>
+     <name>dfs.name.dir</name>
+     <value><%= has_variable?('data_volumes') ? data_volumes.split(',').join('/hadoop/dfs/name,') + '/hadoop/dfs/name' : '/var/lib/hadoop-0.20/cache/hadoop/dfs/name' %></value>
+     <final>true</final>
+  </property>
+  <property>
+     <name>dfs.data.dir</name>
+     <value><%= has_variable?('data_volumes') ? data_volumes.split(',').join('/hadoop/dfs/data,') + '/hadoop/dfs/data' : '/tmp/hadoop/dfs/data' %></value>
+     <final>true</final>
+  </property>
+  <property>
+    <name>dfs.hosts</name>
+    <value><%= scope.lookupvar('hadoop::params::dfs_hosts') %></value>
+    <final>true</final>
+  </property>
+  <property>
+    <name>dfs.hosts.exclude</name>
+    <value><%= scope.lookupvar('hadoop::params::dfs_hosts_exclude') %></value>
+    <final>true</final>
+  </property>
+  <property>
+     <name>dfs.datanode.failed.volumes.tolerated</name>
+     <value><%= scope.lookupvar('hadoop::params::dfs_datanode_failed_volumes_tolerated') %></value>
+     <final>true</final>
+  </property>
+  <property>
+     <name>dfs.namenode.handler.count</name>
+     <value><%= scope.lookupvar('hadoop::params::dfs_namenode_handler_count') %></value>
+  </property>
+  <property>
+     <name>dfs.block.size</name>
+     <value><%= scope.lookupvar('hadoop::params::dfs_block_size') %></value>
+     <final>true</final>
+  </property>
+  <property>
+     <name>dfs.datanode.du.reserved</name>
+     <value><%= scope.lookupvar('hadoop::params::dfs_datanode_du_reserved') %></value>
+     <final>true</final>
+  </property>
+  <property>
+     <name>dfs.datanode.socket.write.timeout</name>
+     <value><%= scope.lookupvar('hadoop::params::dfs_datanode_socket_write_timeout') %></value>
+  </property>
+  <property>
+     <name>dfs.datanode.handler.count</name>
+     <value><%= scope.lookupvar('hadoop::params::dfs_datanode_handler_count') %></value>
+  </property>
+  <property>
+     <name>dfs.datanode.max.xcievers</name>
+     <value><%= scope.lookupvar('hadoop::params::dfs_datanode_max_xcievers') %></value>
+  </property>
+  <property>
+     <name>dfs.balance.bandwidthPerSec</name>
+     <value><%= scope.lookupvar('hadoop::params::dfs_balance_bandwidthpersec') %></value>
+  </property>
+  <property>
+    <name>dfs.namenode.plugins</name>
+    <value><%= scope.lookupvar('hadoop::params::dfs_namenode_plugins') %></value>
+  </property>
+  <property>
+    <name>dfs.datanode.plugins</name>
+    <value><%= scope.lookupvar('hadoop::params::dfs_datanode_plugins') %></value>
+    <description>Comma-separated list of datanode plug-ins to be activated.</description>
+  </property>
+  <property>
+    <name>dfs.thrift.address</name>
+    <value><%= scope.lookupvar('hadoop::params::dfs_thrift_address') %></value>
+  </property>
+</configuration>
